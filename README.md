@@ -11,6 +11,17 @@ Implementation of HTML5 Text Speech API as a WordPress Shortcode.
 * [speech]Charles Darwin developed the theory of Evolution.[/speech]
 ```
 
+### Arguments
+
+* lang - Language that you want it to speak.
+* voice - Voice.
+
+Example:
+
+```
+[speech lang="ja-JP" voice="Alex"]Hello[/speech]
+```
+
 ## Screenshots
 
 ![](https://www.evernote.com/l/ABVNqusBPvRFRarP7qRnbM2TYk_56MObz-sB/image.png)
