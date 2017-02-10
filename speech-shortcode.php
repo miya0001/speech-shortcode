@@ -18,13 +18,13 @@ class Speech_Shortcode
 {
 	public function __construct()
 	{
-		add_action( 'init', 'activate_autoupdate' );
+		add_action( 'init', array( $this, 'activate_autoupdate' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
 
 		add_shortcode( 'speech', array( $this, 'speech' ) );
 	}
 
-	function activate_autoupdate() {
+	public function activate_autoupdate() {
 		$plugin_slug = plugin_basename( __FILE__ );
 		$gh_user = 'miya0001';
 		$gh_repo = 'speech-shortcode';
