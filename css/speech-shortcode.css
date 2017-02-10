@@ -1,0 +1,14 @@
+.speech-shortcode:after
+{
+	content: "\f521";
+	display: inline-block;
+	-webkit-font-smoothing: antialiased;
+	font: normal 20px/1 'dashicons';
+	vertical-align: top;
+	padding-left: 0.5em;
+}
+
+.speech-shortcode
+{
+	cursor: pointer;
+}
