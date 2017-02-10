@@ -7,17 +7,29 @@
  * Author URI:      https://miya.io/
  * Text Domain:     speech-shortcode
  * Domain Path:     /languages
- * Version:         0.1.0
+ * Version:         nightly
  *
  * @package         Speech_Shortcode
  */
+
+require_once( dirname( __FILE__ ) . '/vendor/autoload.php' );
 
 class Speech_Shortcode
 {
 	public function __construct()
 	{
-		add_shortcode( 'speech', array( $this, 'speech' ) );
+		add_action( 'init', 'activate_autoupdate' );
 		add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
+
+		add_shortcode( 'speech', array( $this, 'speech' ) );
+	}
+
+	function activate_autoupdate() {
+		$plugin_slug = plugin_basename( __FILE__ );
+		$gh_user = 'miya0001';
+		$gh_repo = 'speech-shortcode';
+
+		new Miya\WP\GH_Auto_Updater( $plugin_slug, $gh_user, $gh_repo );
 	}
 
 	public function speech( $atts, $content )

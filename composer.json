@@ -1,5 +1,7 @@
 {
+    "minimum-stability": "dev",
     "require": {
-        "phpunit/phpunit": "5.6"
+        "phpunit/phpunit": "5.6",
+        "miya/gh-auto-updater": "dev-master"
     }
 }

@@ -1,27 +1,30 @@
 sudo: false
-
 language: php
-
 notifications:
   email:
     on_success: never
     on_failure: change
-
 branches:
   only:
-    - master
-
+  - master
 php:
-  - 7.0
-  - 5.6
-
+- 7.0
+- 5.6
 env:
-  - WP_VERSION=nightly WP_MULTISITE=0
-  - WP_VERSION=latest WP_MULTISITE=0
-
+- WP_VERSION=nightly WP_MULTISITE=0
+- WP_VERSION=latest WP_MULTISITE=0
+after_success:
+- sed -i -e "s/nightly/${TRAVIS_TAG}/" speech-shortcode.php
+- curl https://raw.githubusercontent.com/miya0001/auto-build/master/auto-build.sh | bash
 before_script:
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-  - composer install
-
+- bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+- composer install
 script:
-  - vendor/bin/phpunit
+- vendor/bin/phpunit
+deploy:
+  provider: releases
+  api_key:
+    secure: Mk6LIVA0IP0UkbU4Me6f1EfPtxvZftKLuDad9ujGiUOY18kWz3v64KfrbpWfEJ6g4F2XcKi9su2QmYqTeXLMKUTo8K5l6LsfROsX74jEy9b/SBGTH11whvMzF5zn5/+mEU2xC+zBi6xEn9kTzbFPafyvVIa5/FOq0/ubH5Grj2+TeAY6HVkO6Wa7VX8m84NYIE+Y4/88qvp8NAqPZ2f5ZGO2aChF7zVmDXMWn5TFfSi+faIdFqfHSIKxG2f3dQx22RE3hjJ9my13vjTAG3zYDXzjYTdGDKR3YnQr15ZhSzFpH+4Y0KW3IVoyHFoKWEoIeK4qnQOt8kAKEok5SSIJ6z2OPDMwBS8Lf28lAdQ9S2yLghPB8scNYB8OPBoSkaW7PXehaHFnUUHjsqYS3xC+OFfIk/seitjMW1tAExEODKe7AC5zsgWNgJB0OEJ0YxMvWE9oIfzUfSCXt7bM1BVRhksq+anSGFMEezQuX/PVdPfOg28FA2/jBRN+fZPVpYRltZPMPqqeAxQsntdZK6PlzY/4tKT33HEaFvXf7DmuH2XqUaln4idrYRiArNuzJN+hZ+x7W4eWOPEQtH7VljGeVYNB8soG0IcqVsDvt7D3L5tqpt3b48OfS3SgKGwvDYPycM6zc/jPQTSdvI9BI/62FTJ+4q73u4VqZD2HSFwZvtI=
+  file: speech-shortcode.zip
+  on:
+    repo: miya0001/speech-shortcode
