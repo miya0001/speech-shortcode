@@ -1,5 +1,7 @@
 # Speech Shortcode for WordPress
 
+[![Build Status](https://travis-ci.org/miya0001/speech-shortcode.svg?branch=master)](https://travis-ci.org/miya0001/speech-shortcode)
+
 Implementation of HTML5 Text Speech API as a WordPress Shortcode.
 
 ## How to Use
