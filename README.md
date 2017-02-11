@@ -4,6 +4,8 @@
 
 Implementation of HTML5 Text Speech API as a WordPress Shortcode.
 
+Demo: https://miya.io/2017/02/10/html5-web-speech-api/
+
 ## How to Use
 
 ```
