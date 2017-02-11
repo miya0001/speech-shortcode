@@ -11,7 +11,7 @@ class Speech_Shortcode_Test extends WP_UnitTestCase
 	{
 		$html = do_shortcode( '[speech]Hello[/speech]' );
 		$this->assertSame(
-			'<span class="speech-shortcode" data-lang="en-US" data-voice="Google US English">Hello</span>',
+			'<span class="speech-shortcode" data-lang="en-US" data-voice="">Hello</span>',
 			$html
 		);
 	}
@@ -20,7 +20,7 @@ class Speech_Shortcode_Test extends WP_UnitTestCase
 	{
 		$html = do_shortcode( '[speech lang="ja"]Hello[/speech]' );
 		$this->assertSame(
-			'<span class="speech-shortcode" data-lang="ja" data-voice="Google US English">Hello</span>',
+			'<span class="speech-shortcode" data-lang="ja" data-voice="">Hello</span>',
 			$html
 		);
 	}
