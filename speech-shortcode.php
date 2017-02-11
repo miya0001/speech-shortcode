@@ -36,14 +36,14 @@ class Speech_Shortcode
 	{
 		$atts = shortcode_atts( array(
 			'lang' => 'en-US',
-			'voice' => 'Google US English'
+			'voice' => ''
 		), $atts, 'speech' );
 
 		return sprintf(
 			'<span class="speech-shortcode" data-lang="%1$s" data-voice="%2$s">%3$s</span>',
 			esc_attr( $atts['lang'] ),
 			esc_attr( $atts['voice'] ),
-				esc_html( $content )
+			esc_html( $content )
 		);
 	}
 
