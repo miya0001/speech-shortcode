@@ -7,18 +7,10 @@ document.addEventListener( "DOMContentLoaded", function( event ) {
 	}
 } );
 
-var stop_rumble = function ( element ) {
-	return function( event ) {
-		element.classList.remove( 'rumble' );
-		event.target.removeEventListener( 'end', arguments.callee, false );
-	}
-}
+var read_text = function( event ) {
+	var self = this;
+	speechSynthesis.cancel();
 
-var read_text = function() {
-	if ( document.querySelector('.rumble') ) {
-		return;
-	}
-	this.classList.add( 'rumble' );
 	var voice = this.getAttribute( 'data-voice' );
 	var synthes = new SpeechSynthesisUtterance( this.textContent );
 	synthes.lang = this.getAttribute( 'data-lang' );
@@ -30,5 +22,11 @@ var read_text = function() {
 	} );
 	speechSynthesis.speak( synthes );
 
-	synthes.addEventListener( 'end', stop_rumble( this ), false );
+	synthes.addEventListener( 'start', function() {
+		self.classList.add( 'rumble' );
+	}, false );
+
+	synthes.addEventListener( 'end', function() {
+		self.classList.remove( 'rumble' );
+	}, false );
 }
