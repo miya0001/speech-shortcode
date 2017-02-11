@@ -5,7 +5,7 @@ document.addEventListener( "DOMContentLoaded", function( event ) {
 		speeches[ i ].addEventListener( 'click', function() {
 			var voice = this.getAttribute( 'data-voice' );
 
-			var synthes = new SpeechSynthesisUtterance( this.innerText );
+			var synthes = new SpeechSynthesisUtterance( this.textContent );
 			synthes.lang = this.getAttribute( 'data-lang' );
 			var voices = speechSynthesis.getVoices();
 			voices.forEach( function( v, i ) {
