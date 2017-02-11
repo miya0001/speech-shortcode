@@ -1,4 +1,4 @@
-var voices = speechSynthesis.getVoices();
+speechSynthesis.getVoices(); // Pre-load voices.
 
 document.addEventListener( "DOMContentLoaded", function( event ) {
 	var speeches = document.querySelectorAll('.speech-shortcode');
@@ -8,8 +8,10 @@ document.addEventListener( "DOMContentLoaded", function( event ) {
 } );
 
 var read_text = function( event ) {
-	var self = this;
 	speechSynthesis.cancel();
+	document.querySelectorAll('.rumble').forEach( function( currentValue ) {
+		currentValue.classList.remove( 'rumble' );
+	} );
 
 	var voice = this.getAttribute( 'data-voice' );
 	var synthes = new SpeechSynthesisUtterance( this.textContent );
@@ -22,11 +24,18 @@ var read_text = function( event ) {
 	} );
 	speechSynthesis.speak( synthes );
 
-	synthes.addEventListener( 'start', function() {
-		self.classList.add( 'rumble' );
-	}, false );
+	synthes.addEventListener( 'boundary', start_rumble( this ), false );
+	synthes.addEventListener( 'end', end_rumble( this ), false );
+}
 
-	synthes.addEventListener( 'end', function() {
-		self.classList.remove( 'rumble' );
-	}, false );
+var start_rumble = function( element ) {
+	return function( event ) {
+		element.classList.add( 'rumble' );
+	}
+}
+
+var end_rumble = function( element ) {
+	return function( event ) {
+		element.classList.remove( 'rumble' );
+	}
 }
