@@ -13,8 +13,14 @@ var read_text = function( event ) {
 		currentValue.classList.remove( 'rumble' );
 	} );
 
-	var voice = this.getAttribute( 'data-voice' );
 	var synthes = new SpeechSynthesisUtterance( this.textContent );
+
+	// `boundary` or `start` doesn't fires with some voice.
+	synthes.addEventListener( 'start', start_rumble( this ), false );
+	synthes.addEventListener( 'boundary', start_rumble( this ), false );
+	synthes.addEventListener( 'end', end_rumble( this ), false );
+
+	var voice = this.getAttribute( 'data-voice' );
 	synthes.lang = this.getAttribute( 'data-lang' );
 	var voices = speechSynthesis.getVoices();
 	voices.forEach( function( v, i ) {
@@ -23,9 +29,6 @@ var read_text = function( event ) {
 		}
 	} );
 	speechSynthesis.speak( synthes );
-
-	synthes.addEventListener( 'boundary', start_rumble( this ), false );
-	synthes.addEventListener( 'end', end_rumble( this ), false );
 }
 
 var start_rumble = function( element ) {

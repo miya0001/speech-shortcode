@@ -35,14 +35,16 @@ class Speech_Shortcode
 	public function speech( $atts, $content )
 	{
 		$atts = shortcode_atts( array(
-			'lang' => 'en-US',
-			'voice' => ''
+			'lang' => apply_filters( 'speech_shortcode_default_lang', 'en-US' ),
+			'voice' => apply_filters( 'speech_shortcode_default_voice', '' ),
+			'rate' => apply_filters( 'speech_shortcode_default_rate', '1' ),
 		), $atts, 'speech' );
 
 		return sprintf(
-			'<span class="speech-shortcode" data-lang="%1$s" data-voice="%2$s">%3$s</span>',
+			'<span class="speech-shortcode" data-lang="%1$s" data-voice="%2$s" data-rate="%3$s">%4$s</span>',
 			esc_attr( $atts['lang'] ),
 			esc_attr( $atts['voice'] ),
+			esc_attr( $atts['rate'] ),
 			esc_html( $content )
 		);
 	}
