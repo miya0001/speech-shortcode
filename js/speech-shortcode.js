@@ -20,14 +20,17 @@ var read_text = function( event ) {
 	synthes.addEventListener( 'boundary', start_rumble( this ), false );
 	synthes.addEventListener( 'end', end_rumble( this ), false );
 
-	var voice = this.getAttribute( 'data-voice' );
 	synthes.lang = this.getAttribute( 'data-lang' );
+	synthes.rate = parseFloat( this.getAttribute( 'data-rate' ) );
+
+	var voice = this.getAttribute( 'data-voice' );
 	var voices = speechSynthesis.getVoices();
 	voices.forEach( function( v, i ) {
 		if ( v.name == voice ) {
 			synthes.voice = v;
 		}
 	} );
+
 	speechSynthesis.speak( synthes );
 }
 
