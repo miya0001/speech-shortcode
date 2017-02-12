@@ -15,14 +15,21 @@ Demo: https://miya.io/2017/02/10/html5-web-speech-api/
 
 ### Arguments
 
-* lang - Language that you want it to speak.
-* voice - Voice.
+* lang - Language that you want it to speak. Default value is "en-US".
+* voice - Voice. Default value is "".
+* rate - Default value is 1.
 
 Example:
 
 ```
 [speech lang="ja-JP" voice="Alex"]Hello[/speech]
 ```
+
+### Filter Hooks
+
+* speech_shortcode_default_lang
+* speech_shortcode_default_voice
+* speech_shortcode_default_rate
 
 ## Screenshots
 
