@@ -45,7 +45,7 @@ class Speech_Shortcode
 			esc_attr( $atts['lang'] ),
 			esc_attr( $atts['voice'] ),
 			esc_attr( $atts['rate'] ),
-			esc_html( $content )
+			wp_strip_all_tags( $content )
 		);
 	}
 
