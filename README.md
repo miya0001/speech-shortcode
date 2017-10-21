@@ -22,7 +22,7 @@ Demo: https://miya.io/2017/02/10/html5-web-speech-api/
 Example:
 
 ```
-[speech lang="ja-JP" voice="Alex"]Hello[/speech]
+[speech lang="en-US" voice="Alex"]Hello World[/speech]
 ```
 
 ### Filter Hooks
