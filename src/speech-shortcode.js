@@ -3,14 +3,24 @@
 
 	var el = document.querySelector( '.speech-shortcode' );
 	if ( el ) {
-		var url = el.getAttribute( 'data-url' );
-		var ver = el.getAttribute( 'data-version' );
+		var me = '/js/speech-shortcode.min.js';
+		var css = '/css/speech-shortcode.min.css';
+
+		var scripts = document.querySelectorAll( 'script' );
+		scripts.forEach( function( item ) {
+			var src = item.getAttribute( 'src' );
+			if ( src ) {
+				if ( 0 < src.indexOf( me ) ) {
+					css = src.replace( me, css );
+				}
+			}
+		} );
 
 		var link = document.createElement( 'link' );
 		link.setAttribute( 'rel', 'stylesheet' );
 		link.setAttribute( 'type', 'text/css' );
 		link.setAttribute( 'media', 'all' );
-		link.setAttribute( 'href', url + '/css/speech-shortcode.min.css?ver=' + ver );
+		link.setAttribute( 'href', css );
 		document.head.appendChild( link );
 	}
 

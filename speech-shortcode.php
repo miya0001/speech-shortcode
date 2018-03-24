@@ -51,13 +51,11 @@ class Speech_Shortcode
 		);
 
 		return sprintf(
-			'<span class="speech-shortcode" data-lang="%1$s" data-voice="%2$s" data-rate="%3$s" data-url="%5$s" data-version="%6$s">%4$s</span>',
+			'<span class="speech-shortcode" data-lang="%1$s" data-voice="%2$s" data-rate="%3$s">%4$s</span>',
 			esc_attr( $atts['lang'] ),
 			esc_attr( $atts['voice'] ),
 			esc_attr( $atts['rate'] ),
-			wp_strip_all_tags( $content ),
-			esc_url( untrailingslashit( plugins_url( "", __FILE__ ) ) ),
-			esc_attr( self::version )
+			wp_strip_all_tags( $content )
 		);
 	}
 
