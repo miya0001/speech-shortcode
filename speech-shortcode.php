@@ -46,7 +46,7 @@ class Speech_Shortcode
 			'speech-shortcode',
 			plugins_url( 'js/speech-shortcode.min.js', __FILE__ ),
 			array(),
-			filemtime( dirname( __FILE__ ) . '/js/speech-shortcode.min.js' ),
+			self::version,
 			true
 		);
 
