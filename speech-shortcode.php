@@ -53,9 +53,9 @@ class Speech_Shortcode
 	{
 		wp_enqueue_script(
 			'speech-shortcode',
-			plugins_url( 'js/speech-shortcode.js', __FILE__ ),
+			plugins_url( 'js/speech-shortcode.min.js', __FILE__ ),
 			array(),
-			filemtime( dirname( __FILE__ ) . '/js/speech-shortcode.js' ),
+			filemtime( dirname( __FILE__ ) . '/js/speech-shortcode.min.js' ),
 			true
 		);
 
@@ -63,9 +63,9 @@ class Speech_Shortcode
 
 		wp_enqueue_style(
 			'speech-shortcode',
-			plugins_url( 'css/speech-shortcode.css', __FILE__ ),
+			plugins_url( 'css/speech-shortcode.min.css', __FILE__ ),
 			array(),
-			filemtime( dirname( __FILE__ ) . '/css/speech-shortcode.css' )
+			filemtime( dirname( __FILE__ ) . '/css/speech-shortcode.min.css' )
 		);
 	}
 }
