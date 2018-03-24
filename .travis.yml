@@ -4,6 +4,10 @@ notifications:
   email:
     on_success: never
     on_failure: change
+branches:
+  only:
+    - master
+    - "/^v?[0-9\\.]+/"
 php:
 - 7.0
 - 5.6
@@ -12,7 +16,8 @@ env:
 - WP_VERSION=latest WP_MULTISITE=0
 after_success:
 - sed -i -e "s/nightly/${TRAVIS_TAG}/" speech-shortcode.php
-- curl https://raw.githubusercontent.com/miya0001/auto-build/master/auto-build.sh | bash
+- curl https://raw.githubusercontent.com/miya0001/auto-build/master/auto-build.sh
+  | bash
 before_script:
 - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 - composer install
@@ -22,8 +27,9 @@ script:
 - vendor/bin/phpunit
 deploy:
   provider: releases
+  skip_cleanup: true
   api_key:
-    secure: Mk6LIVA0IP0UkbU4Me6f1EfPtxvZftKLuDad9ujGiUOY18kWz3v64KfrbpWfEJ6g4F2XcKi9su2QmYqTeXLMKUTo8K5l6LsfROsX74jEy9b/SBGTH11whvMzF5zn5/+mEU2xC+zBi6xEn9kTzbFPafyvVIa5/FOq0/ubH5Grj2+TeAY6HVkO6Wa7VX8m84NYIE+Y4/88qvp8NAqPZ2f5ZGO2aChF7zVmDXMWn5TFfSi+faIdFqfHSIKxG2f3dQx22RE3hjJ9my13vjTAG3zYDXzjYTdGDKR3YnQr15ZhSzFpH+4Y0KW3IVoyHFoKWEoIeK4qnQOt8kAKEok5SSIJ6z2OPDMwBS8Lf28lAdQ9S2yLghPB8scNYB8OPBoSkaW7PXehaHFnUUHjsqYS3xC+OFfIk/seitjMW1tAExEODKe7AC5zsgWNgJB0OEJ0YxMvWE9oIfzUfSCXt7bM1BVRhksq+anSGFMEezQuX/PVdPfOg28FA2/jBRN+fZPVpYRltZPMPqqeAxQsntdZK6PlzY/4tKT33HEaFvXf7DmuH2XqUaln4idrYRiArNuzJN+hZ+x7W4eWOPEQtH7VljGeVYNB8soG0IcqVsDvt7D3L5tqpt3b48OfS3SgKGwvDYPycM6zc/jPQTSdvI9BI/62FTJ+4q73u4VqZD2HSFwZvtI=
+    secure: fc60/yUNFkFM43MFkBKrBAtdZaz0LMGtPtmkR3d0S5zcM/LLVbQlU4IlubTmhM5QX+3pa8Q7QsccDHmB83ySIA5+sckPrtuz7UsP5/EsjLfbT0b+g4Xhzw3n5z71sOseNK6INXTnBBhfT3KhSiMwvCjv7EjkshWFTPxvdwHpVBtlSZGwVRP7qhLtd1K39zqQDKK9QvvTLY96/x5JWK8cIqaSIOpIY/tPsaZw3wsZ+9U5+Qnn+Lumn6ctPcfYe+Jtvny7mGkseVFNZNIVa51X+Oa9AvrOICaTOAK25vV/lSAzkXqx7DYycQeE1o/Iyfx8Nfl2wXJRH5iMF1hxUuieVByaWc52E63LBRe/ml3jiWUPheGY2wKeaBZPWRUNuONzcn9vXsjIU8ed61u4NzP6bpz7h8AxnTnJjNKkyd6UdDmUuoAMrztk3iCDouyTJ38HwGku3Io154iu74e5X6WnzCOKWG4YxAR5nGhBaJweKiMqkUjLam0SMGC69at8aGPnLuT+f2+czy0cQfRfWnYn2wLaoRz2UtSeLc8H9ak49oMhanUBeDW/eGVb2ubriWAAxNLmuyLATVksBVCIZdVGz24DWW6v68b2JKJ/+xtrI7HikL6Kj+gSg3lZcBizUuFgiGzlxaigIbBDgD/lSXYtsmo8YRZ5E4kq1ul5M39SMK0=
   file: speech-shortcode.zip
   on:
     tags: true
